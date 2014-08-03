@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
 	before_save :encrypt_password
 	after_save :clear_password
+	after_save :generate_api_key
 	def encrypt_password
 		if password.present?
 		self.salt = BCrypt::Engine.generate_salt
@@ -26,5 +27,9 @@ class User < ActiveRecord::Base
 	      nil
 	    end
   	end
+
+  def generate_api_key
+    update_column :api_key, Digest::SHA256.hexdigest("#{email}#{Time.now.getutc}")
+  end
 
 end
