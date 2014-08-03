@@ -20,6 +20,5 @@ test:
   <<: *default
   database: db/test.sqlite3
 
-production:
-  <<: *default
-  database: db/production.sqlite3
+# No production in public github repo
+# The database.yml will be replaced during deployment
