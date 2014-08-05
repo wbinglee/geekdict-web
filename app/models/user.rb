@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
 	attr_accessor :password
+	
+	has_many :query
+
 	validates :email, format: { with: /\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/, 
                               message: "%{value} is not a valid email" }, uniqueness: true
   
