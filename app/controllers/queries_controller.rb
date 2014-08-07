@@ -28,14 +28,10 @@ class QueriesController < ApiController
     @query.query = params[:query]
     @query.user_id = current_user.id
 
-    respond_to do |format|
-      if @query.save
-        format.html { redirect_to @query, notice: 'Query was successfully created.' }
-        format.json { render :show, status: :created, location: @query }
-      else
-        format.html { render :new }
-        format.json { render json: @query.errors, status: :unprocessable_entity }
-      end
+    if @query.save
+      render json: @query, status: :created
+    else
+      render json: @query.errors, status: :unprocessable_entity
     end
   end
 
