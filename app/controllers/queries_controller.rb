@@ -1,12 +1,9 @@
-class QueriesController < ApplicationController
-  protect_from_forgery :except => :create 
-
-  before_action :set_query, only: [:show, :edit, :update, :destroy]
+class QueriesController < ApiController
 
   # GET /queries
   # GET /queries.json
   def index
-    @queries = Query.all
+    render json: current_user.query
   end
 
   # GET /queries/1
@@ -27,7 +24,9 @@ class QueriesController < ApplicationController
   # POST /queries.json
   def create
     #query user
-    @query = Query.new(query_params)
+    @query = Query.new
+    @query.query = params[:query]
+    @query.user_id = current_user.id
 
     respond_to do |format|
       if @query.save
