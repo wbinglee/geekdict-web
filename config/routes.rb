@@ -1,22 +1,24 @@
 Rails.application.routes.draw do
 
-  resources :queries
+  # resources :queries
 
-  get 'query/list'
+  # get 'query/list'
 
-  get "log_out" => "sessions#destroy", :as => "log_out"
-  get "log_in" => "sessions#new", :as => "log_in"
-  get "sign_up" => "users#new", :as => "sign_up"
+  # get "log_out" => "sessions#destroy", :as => "log_out"
+  # get "log_in" => "sessions#new", :as => "log_in"
+  # get "sign_up" => "users#new", :as => "sign_up"
+
+  #Only expose query API current, not ready for public
+  #If you need to use it, you will need to ask me for a valid api key
 
   get "api/query" => "queries#create"
   
   #todo
   #get "profile" => "users#profile", :as=> "profile"
-  root :to => "users#new"
-  resources :users
-  resources :sessions
 
-  resources :queries
+  # root :to => "users#new"
+  # resources :users
+  # resources :sessions
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
